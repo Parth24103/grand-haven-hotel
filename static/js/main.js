@@ -1,0 +1,1 @@
+const b=document.getElementById("backTop");window.addEventListener("scroll",()=>{if(!b)return;b.style.display=scrollY>500?"flex":"none"});if(b)b.onclick=()=>scrollTo({top:0,behavior:"smooth"});setTimeout(()=>document.querySelectorAll(".flash-wrap .alert").forEach(e=>{e.style.opacity=0;setTimeout(()=>e.remove(),400)}),4500);

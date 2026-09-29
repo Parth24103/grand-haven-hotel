@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Book {{ room.name }} | Hotel Management System{% endblock %}
+{% block content %}
+<section class="section-pad booking-page">
+  <div class="container">
+    <a href="{{ url_for('room_list') }}" class="text-link mb-4 d-inline-block">← Back to rooms</a>
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-6">
+        <img class="booking-image" src="{{ room.image }}" alt="{{ room.name }}">
+        <p class="eyebrow mt-4">{{ room.type }}</p>
+        <h1 class="booking-title">{{ room.name }}</h1>
+        <p class="muted">{{ room.description }}</p>
+        <h4>₹{{ room.price }} <small class="text-muted">/ night</small></h4>
+      </div>
+
+      <div class="col-lg-6">
+        <form method="POST" action="{{ url_for('booking_success') }}" class="contact-form">
+          <input type="hidden" name="room" value="{{ room.name }}">
+
+          <h3>Request a reservation</h3>
+          <p class="muted">Enter your details and booking dates to request your reservation.</p>
+
+          <label for="name">Your Name *</label>
+          <input id="name" name="name" required placeholder="Enter your name">
+
+          <label for="phone">Customer Phone / WhatsApp Number *</label>
+          <input id="phone" name="phone" type="tel" required
+                 placeholder="+91 98765 43210"
+                 pattern="[0-9+()\-\s]{7,20}">
+
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com">
+
+          <div class="row g-3">
+            <div class="col-6">
+              <label for="check_in">Check-in *</label>
+              <input id="check_in" type="date" name="check_in" required>
+            </div>
+            <div class="col-6">
+              <label for="check_out">Check-out *</label>
+              <input id="check_out" type="date" name="check_out" required>
+            </div>
+          </div>
+
+          <label for="guests">Number of Guests</label>
+          <input id="guests" type="number" name="guests" min="1" max="20" value="1" placeholder="2">
+
+          <button type="submit" class="btn btn-dark btn-lg w-100 mt-3">Request Booking</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
